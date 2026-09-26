@@ -1,0 +1,466 @@
+===== r1# show ip route
+Codes: K - kernel route, C - connected, L - local, S - static,
+       R - RIP, O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric, t - Table-Direct,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+IPv4 unicast VRF default:
+K>* 0.0.0.0/0 [0/0] via 172.20.20.1, eth0, weight 1, 00:00:36
+C>* 10.0.12.0/30 is directly connected, eth1, weight 1, 00:00:36
+L>* 10.0.12.1/32 is directly connected, eth1, weight 1, 00:00:36
+C>* 10.0.13.0/30 is directly connected, eth2, weight 1, 00:00:36
+L>* 10.0.13.1/32 is directly connected, eth2, weight 1, 00:00:36
+O>* 10.0.25.0/30 [110/20] via 10.0.12.2, eth1, weight 1, 00:00:21
+O>* 10.0.34.0/30 [110/130] via 10.0.12.2, eth1, weight 1, 00:00:21
+O>* 10.0.45.0/30 [110/30] via 10.0.12.2, eth1, weight 1, 00:00:21
+L * 10.255.0.1/32 is directly connected, lo, weight 1, 00:00:36
+C>* 10.255.0.1/32 is directly connected, lo, weight 1, 00:00:36
+O>* 10.255.0.2/32 [110/10] via 10.0.12.2, eth1, weight 1, 00:00:21
+O>* 10.255.0.3/32 [110/100] via 10.0.13.2, eth2, weight 1, 00:00:21
+O>* 10.255.0.4/32 [110/30] via 10.0.12.2, eth1, weight 1, 00:00:21
+O>* 10.255.0.5/32 [110/20] via 10.0.12.2, eth1, weight 1, 00:00:21
+C>* 172.20.20.0/24 is directly connected, eth0, weight 1, 00:00:36
+L>* 172.20.20.8/32 is directly connected, eth0, weight 1, 00:00:36
+C>* 192.168.1.0/24 is directly connected, eth3, weight 1, 00:00:36
+L>* 192.168.1.1/32 is directly connected, eth3, weight 1, 00:00:36
+O>* 192.168.2.0/24 [110/20] via 10.0.12.2, eth1, weight 1, 00:00:21
+O>* 192.168.3.0/24 [110/110] via 10.0.13.2, eth2, weight 1, 00:00:21
+O>* 192.168.4.0/24 [110/40] via 10.0.12.2, eth1, weight 1, 00:00:21
+O>* 192.168.5.0/24 [110/30] via 10.0.12.2, eth1, weight 1, 00:00:21
+
+===== r1# show ip ospf neighbor
+
+Neighbor ID     Pri State           Up Time         Dead Time Address         Interface                        RXmtL RqstL DBsmL
+10.255.0.2        1 Full/-          26.344s           33.655s 10.0.12.2       eth1:10.0.12.1                       0     0     0
+10.255.0.3        1 Full/-          26.244s           33.686s 10.0.13.2       eth2:10.0.13.1                       0     0     0
+
+
+===== r1# show ip ospf database
+
+       OSPF Router with ID (10.255.0.1)
+
+                Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age  Seq#       CkSum  Link count
+10.255.0.1     10.255.0.1        26 0x80000006 0x1808 6
+10.255.0.2     10.255.0.2        27 0x80000006 0x5a5c 6
+10.255.0.3     10.255.0.3        29 0x80000006 0x270f 6
+10.255.0.4     10.255.0.4        24 0x80000006 0xbfe3 6
+10.255.0.5     10.255.0.5        28 0x80000006 0x83e3 6
+
+
+
+===== r1# show ip ospf route
+============ OSPF network routing table ============
+N    10.0.12.0/30          [10] area: 0.0.0.0
+                           directly attached to eth1
+N    10.0.13.0/30          [100] area: 0.0.0.0
+                           directly attached to eth2
+N    10.0.25.0/30          [20] area: 0.0.0.0
+                           via 10.0.12.2, eth1
+N    10.0.34.0/30          [130] area: 0.0.0.0
+                           via 10.0.12.2, eth1
+N    10.0.45.0/30          [30] area: 0.0.0.0
+                           via 10.0.12.2, eth1
+N    10.255.0.1/32         [0] area: 0.0.0.0
+                           directly attached to lo
+N    10.255.0.2/32         [10] area: 0.0.0.0
+                           via 10.0.12.2, eth1
+N    10.255.0.3/32         [100] area: 0.0.0.0
+                           via 10.0.13.2, eth2
+N    10.255.0.4/32         [30] area: 0.0.0.0
+                           via 10.0.12.2, eth1
+N    10.255.0.5/32         [20] area: 0.0.0.0
+                           via 10.0.12.2, eth1
+N    192.168.1.0/24        [10] area: 0.0.0.0
+                           directly attached to eth3
+N    192.168.2.0/24        [20] area: 0.0.0.0
+                           via 10.0.12.2, eth1
+N    192.168.3.0/24        [110] area: 0.0.0.0
+                           via 10.0.13.2, eth2
+N    192.168.4.0/24        [40] area: 0.0.0.0
+                           via 10.0.12.2, eth1
+N    192.168.5.0/24        [30] area: 0.0.0.0
+                           via 10.0.12.2, eth1
+
+============ OSPF router routing table =============
+
+============ OSPF external routing table ===========
+
+
+
+===== r2# show ip route
+Codes: K - kernel route, C - connected, L - local, S - static,
+       R - RIP, O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric, t - Table-Direct,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+IPv4 unicast VRF default:
+K>* 0.0.0.0/0 [0/0] via 172.20.20.1, eth0, weight 1, 00:00:37
+C>* 10.0.12.0/30 is directly connected, eth1, weight 1, 00:00:37
+L>* 10.0.12.2/32 is directly connected, eth1, weight 1, 00:00:37
+O>* 10.0.13.0/30 [110/110] via 10.0.12.1, eth1, weight 1, 00:00:22
+C>* 10.0.25.0/30 is directly connected, eth2, weight 1, 00:00:37
+L>* 10.0.25.1/32 is directly connected, eth2, weight 1, 00:00:37
+O>* 10.0.34.0/30 [110/120] via 10.0.25.2, eth2, weight 1, 00:00:22
+O>* 10.0.45.0/30 [110/20] via 10.0.25.2, eth2, weight 1, 00:00:22
+O>* 10.255.0.1/32 [110/10] via 10.0.12.1, eth1, weight 1, 00:00:22
+L * 10.255.0.2/32 is directly connected, lo, weight 1, 00:00:37
+C>* 10.255.0.2/32 is directly connected, lo, weight 1, 00:00:37
+O>* 10.255.0.3/32 [110/110] via 10.0.12.1, eth1, weight 1, 00:00:22
+O>* 10.255.0.4/32 [110/20] via 10.0.25.2, eth2, weight 1, 00:00:22
+O>* 10.255.0.5/32 [110/10] via 10.0.25.2, eth2, weight 1, 00:00:22
+C>* 172.20.20.0/24 is directly connected, eth0, weight 1, 00:00:37
+L>* 172.20.20.3/32 is directly connected, eth0, weight 1, 00:00:37
+O>* 192.168.1.0/24 [110/20] via 10.0.12.1, eth1, weight 1, 00:00:22
+C>* 192.168.2.0/24 is directly connected, eth3, weight 1, 00:00:37
+L>* 192.168.2.1/32 is directly connected, eth3, weight 1, 00:00:37
+O>* 192.168.3.0/24 [110/120] via 10.0.12.1, eth1, weight 1, 00:00:22
+O>* 192.168.4.0/24 [110/30] via 10.0.25.2, eth2, weight 1, 00:00:22
+O>* 192.168.5.0/24 [110/20] via 10.0.25.2, eth2, weight 1, 00:00:22
+
+===== r2# show ip ospf neighbor
+
+Neighbor ID     Pri State           Up Time         Dead Time Address         Interface                        RXmtL RqstL DBsmL
+10.255.0.1        1 Full/-          26.509s           33.648s 10.0.12.1       eth1:10.0.12.2                       0     0     0
+10.255.0.5        1 Full/-          26.507s           33.497s 10.0.25.2       eth2:10.0.25.1                       0     0     0
+
+
+===== r2# show ip ospf database
+
+       OSPF Router with ID (10.255.0.2)
+
+                Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age  Seq#       CkSum  Link count
+10.255.0.1     10.255.0.1        27 0x80000006 0x1808 6
+10.255.0.2     10.255.0.2        26 0x80000006 0x5a5c 6
+10.255.0.3     10.255.0.3        28 0x80000006 0x270f 6
+10.255.0.4     10.255.0.4        23 0x80000006 0xbfe3 6
+10.255.0.5     10.255.0.5        27 0x80000006 0x83e3 6
+
+
+
+===== r2# show ip ospf route
+============ OSPF network routing table ============
+N    10.0.12.0/30          [10] area: 0.0.0.0
+                           directly attached to eth1
+N    10.0.13.0/30          [110] area: 0.0.0.0
+                           via 10.0.12.1, eth1
+N    10.0.25.0/30          [10] area: 0.0.0.0
+                           directly attached to eth2
+N    10.0.34.0/30          [120] area: 0.0.0.0
+                           via 10.0.25.2, eth2
+N    10.0.45.0/30          [20] area: 0.0.0.0
+                           via 10.0.25.2, eth2
+N    10.255.0.1/32         [10] area: 0.0.0.0
+                           via 10.0.12.1, eth1
+N    10.255.0.2/32         [0] area: 0.0.0.0
+                           directly attached to lo
+N    10.255.0.3/32         [110] area: 0.0.0.0
+                           via 10.0.12.1, eth1
+N    10.255.0.4/32         [20] area: 0.0.0.0
+                           via 10.0.25.2, eth2
+N    10.255.0.5/32         [10] area: 0.0.0.0
+                           via 10.0.25.2, eth2
+N    192.168.1.0/24        [20] area: 0.0.0.0
+                           via 10.0.12.1, eth1
+N    192.168.2.0/24        [10] area: 0.0.0.0
+                           directly attached to eth3
+N    192.168.3.0/24        [120] area: 0.0.0.0
+                           via 10.0.12.1, eth1
+N    192.168.4.0/24        [30] area: 0.0.0.0
+                           via 10.0.25.2, eth2
+N    192.168.5.0/24        [20] area: 0.0.0.0
+                           via 10.0.25.2, eth2
+
+============ OSPF router routing table =============
+
+============ OSPF external routing table ===========
+
+
+
+===== r3# show ip route
+Codes: K - kernel route, C - connected, L - local, S - static,
+       R - RIP, O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric, t - Table-Direct,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+IPv4 unicast VRF default:
+K>* 0.0.0.0/0 [0/0] via 172.20.20.1, eth0, weight 1, 00:00:37
+O>* 10.0.12.0/30 [110/110] via 10.0.13.1, eth1, weight 1, 00:00:22
+C>* 10.0.13.0/30 is directly connected, eth1, weight 1, 00:00:37
+L>* 10.0.13.2/32 is directly connected, eth1, weight 1, 00:00:37
+O>* 10.0.25.0/30 [110/120] via 10.0.13.1, eth1, weight 1, 00:00:17
+  *                        via 10.0.34.2, eth2, weight 1, 00:00:17
+C>* 10.0.34.0/30 is directly connected, eth2, weight 1, 00:00:37
+L>* 10.0.34.1/32 is directly connected, eth2, weight 1, 00:00:37
+O>* 10.0.45.0/30 [110/110] via 10.0.34.2, eth2, weight 1, 00:00:22
+O>* 10.255.0.1/32 [110/100] via 10.0.13.1, eth1, weight 1, 00:00:22
+O>* 10.255.0.2/32 [110/110] via 10.0.13.1, eth1, weight 1, 00:00:22
+L * 10.255.0.3/32 is directly connected, lo, weight 1, 00:00:37
+C>* 10.255.0.3/32 is directly connected, lo, weight 1, 00:00:37
+O>* 10.255.0.4/32 [110/100] via 10.0.34.2, eth2, weight 1, 00:00:22
+O>* 10.255.0.5/32 [110/110] via 10.0.34.2, eth2, weight 1, 00:00:17
+C>* 172.20.20.0/24 is directly connected, eth0, weight 1, 00:00:37
+L>* 172.20.20.7/32 is directly connected, eth0, weight 1, 00:00:37
+O>* 192.168.1.0/24 [110/110] via 10.0.13.1, eth1, weight 1, 00:00:22
+O>* 192.168.2.0/24 [110/120] via 10.0.13.1, eth1, weight 1, 00:00:22
+C>* 192.168.3.0/24 is directly connected, eth3, weight 1, 00:00:37
+L>* 192.168.3.1/32 is directly connected, eth3, weight 1, 00:00:37
+O>* 192.168.4.0/24 [110/110] via 10.0.34.2, eth2, weight 1, 00:00:22
+O>* 192.168.5.0/24 [110/120] via 10.0.34.2, eth2, weight 1, 00:00:17
+
+===== r3# show ip ospf neighbor
+
+Neighbor ID     Pri State           Up Time         Dead Time Address         Interface                        RXmtL RqstL DBsmL
+10.255.0.1        1 Full/-          26.573s           33.505s 10.0.13.1       eth1:10.0.13.2                       0     0     0
+10.255.0.4        1 Full/-          26.422s           33.749s 10.0.34.2       eth2:10.0.34.1                       0     0     0
+
+
+===== r3# show ip ospf database
+
+       OSPF Router with ID (10.255.0.3)
+
+                Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age  Seq#       CkSum  Link count
+10.255.0.1     10.255.0.1        27 0x80000006 0x1808 6
+10.255.0.2     10.255.0.2        29 0x80000006 0x5a5c 6
+10.255.0.3     10.255.0.3        26 0x80000006 0x270f 6
+10.255.0.4     10.255.0.4        22 0x80000006 0xbfe3 6
+10.255.0.5     10.255.0.5        28 0x80000006 0x83e3 6
+
+
+
+===== r3# show ip ospf route
+============ OSPF network routing table ============
+N    10.0.12.0/30          [110] area: 0.0.0.0
+                           via 10.0.13.1, eth1
+N    10.0.13.0/30          [100] area: 0.0.0.0
+                           directly attached to eth1
+N    10.0.25.0/30          [120] area: 0.0.0.0
+                           via 10.0.13.1, eth1
+                           via 10.0.34.2, eth2
+N    10.0.34.0/30          [100] area: 0.0.0.0
+                           directly attached to eth2
+N    10.0.45.0/30          [110] area: 0.0.0.0
+                           via 10.0.34.2, eth2
+N    10.255.0.1/32         [100] area: 0.0.0.0
+                           via 10.0.13.1, eth1
+N    10.255.0.2/32         [110] area: 0.0.0.0
+                           via 10.0.13.1, eth1
+N    10.255.0.3/32         [0] area: 0.0.0.0
+                           directly attached to lo
+N    10.255.0.4/32         [100] area: 0.0.0.0
+                           via 10.0.34.2, eth2
+N    10.255.0.5/32         [110] area: 0.0.0.0
+                           via 10.0.34.2, eth2
+N    192.168.1.0/24        [110] area: 0.0.0.0
+                           via 10.0.13.1, eth1
+N    192.168.2.0/24        [120] area: 0.0.0.0
+                           via 10.0.13.1, eth1
+N    192.168.3.0/24        [10] area: 0.0.0.0
+                           directly attached to eth3
+N    192.168.4.0/24        [110] area: 0.0.0.0
+                           via 10.0.34.2, eth2
+N    192.168.5.0/24        [120] area: 0.0.0.0
+                           via 10.0.34.2, eth2
+
+============ OSPF router routing table =============
+
+============ OSPF external routing table ===========
+
+
+
+===== r4# show ip route
+Codes: K - kernel route, C - connected, L - local, S - static,
+       R - RIP, O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric, t - Table-Direct,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+IPv4 unicast VRF default:
+K>* 0.0.0.0/0 [0/0] via 172.20.20.1, eth0, weight 1, 00:00:37
+O>* 10.0.12.0/30 [110/30] via 10.0.45.2, eth2, weight 1, 00:00:22
+O>* 10.0.13.0/30 [110/130] via 10.0.45.2, eth2, weight 1, 00:00:22
+O>* 10.0.25.0/30 [110/20] via 10.0.45.2, eth2, weight 1, 00:00:22
+C>* 10.0.34.0/30 is directly connected, eth1, weight 1, 00:00:36
+L>* 10.0.34.2/32 is directly connected, eth1, weight 1, 00:00:36
+C>* 10.0.45.0/30 is directly connected, eth2, weight 1, 00:00:36
+L>* 10.0.45.1/32 is directly connected, eth2, weight 1, 00:00:36
+O>* 10.255.0.1/32 [110/30] via 10.0.45.2, eth2, weight 1, 00:00:22
+O>* 10.255.0.2/32 [110/20] via 10.0.45.2, eth2, weight 1, 00:00:22
+O>* 10.255.0.3/32 [110/100] via 10.0.34.1, eth1, weight 1, 00:00:22
+L * 10.255.0.4/32 is directly connected, lo, weight 1, 00:00:36
+C>* 10.255.0.4/32 is directly connected, lo, weight 1, 00:00:36
+O>* 10.255.0.5/32 [110/10] via 10.0.45.2, eth2, weight 1, 00:00:22
+C>* 172.20.20.0/24 is directly connected, eth0, weight 1, 00:00:37
+L>* 172.20.20.9/32 is directly connected, eth0, weight 1, 00:00:37
+O>* 192.168.1.0/24 [110/40] via 10.0.45.2, eth2, weight 1, 00:00:22
+O>* 192.168.2.0/24 [110/30] via 10.0.45.2, eth2, weight 1, 00:00:22
+O>* 192.168.3.0/24 [110/110] via 10.0.34.1, eth1, weight 1, 00:00:22
+C>* 192.168.4.0/24 is directly connected, eth3, weight 1, 00:00:36
+L>* 192.168.4.1/32 is directly connected, eth3, weight 1, 00:00:36
+O>* 192.168.5.0/24 [110/20] via 10.0.45.2, eth2, weight 1, 00:00:22
+
+===== r4# show ip ospf neighbor
+
+Neighbor ID     Pri State           Up Time         Dead Time Address         Interface                        RXmtL RqstL DBsmL
+10.255.0.3        1 Full/-          21.691s           33.377s 10.0.34.1       eth1:10.0.34.2                       0     0     0
+10.255.0.5        1 Full/-          26.595s           33.407s 10.0.45.2       eth2:10.0.45.1                       0     0     0
+
+
+===== r4# show ip ospf database
+
+       OSPF Router with ID (10.255.0.4)
+
+                Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age  Seq#       CkSum  Link count
+10.255.0.1     10.255.0.1        29 0x80000006 0x1808 6
+10.255.0.2     10.255.0.2        28 0x80000006 0x5a5c 6
+10.255.0.3     10.255.0.3        26 0x80000006 0x270f 6
+10.255.0.4     10.255.0.4        21 0x80000006 0xbfe3 6
+10.255.0.5     10.255.0.5        27 0x80000006 0x83e3 6
+
+
+
+===== r4# show ip ospf route
+============ OSPF network routing table ============
+N    10.0.12.0/30          [30] area: 0.0.0.0
+                           via 10.0.45.2, eth2
+N    10.0.13.0/30          [130] area: 0.0.0.0
+                           via 10.0.45.2, eth2
+N    10.0.25.0/30          [20] area: 0.0.0.0
+                           via 10.0.45.2, eth2
+N    10.0.34.0/30          [100] area: 0.0.0.0
+                           directly attached to eth1
+N    10.0.45.0/30          [10] area: 0.0.0.0
+                           directly attached to eth2
+N    10.255.0.1/32         [30] area: 0.0.0.0
+                           via 10.0.45.2, eth2
+N    10.255.0.2/32         [20] area: 0.0.0.0
+                           via 10.0.45.2, eth2
+N    10.255.0.3/32         [100] area: 0.0.0.0
+                           via 10.0.34.1, eth1
+N    10.255.0.4/32         [0] area: 0.0.0.0
+                           directly attached to lo
+N    10.255.0.5/32         [10] area: 0.0.0.0
+                           via 10.0.45.2, eth2
+N    192.168.1.0/24        [40] area: 0.0.0.0
+                           via 10.0.45.2, eth2
+N    192.168.2.0/24        [30] area: 0.0.0.0
+                           via 10.0.45.2, eth2
+N    192.168.3.0/24        [110] area: 0.0.0.0
+                           via 10.0.34.1, eth1
+N    192.168.4.0/24        [10] area: 0.0.0.0
+                           directly attached to eth3
+N    192.168.5.0/24        [20] area: 0.0.0.0
+                           via 10.0.45.2, eth2
+
+============ OSPF router routing table =============
+
+============ OSPF external routing table ===========
+
+
+
+===== r5# show ip route
+Codes: K - kernel route, C - connected, L - local, S - static,
+       R - RIP, O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric, t - Table-Direct,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+IPv4 unicast VRF default:
+K>* 0.0.0.0/0 [0/0] via 172.20.20.1, eth0, weight 1, 00:00:37
+O>* 10.0.12.0/30 [110/20] via 10.0.25.1, eth2, weight 1, 00:00:22
+O>* 10.0.13.0/30 [110/120] via 10.0.25.1, eth2, weight 1, 00:00:22
+C>* 10.0.25.0/30 is directly connected, eth2, weight 1, 00:00:37
+L>* 10.0.25.2/32 is directly connected, eth2, weight 1, 00:00:37
+O>* 10.0.34.0/30 [110/110] via 10.0.45.1, eth1, weight 1, 00:00:22
+C>* 10.0.45.0/30 is directly connected, eth1, weight 1, 00:00:37
+L>* 10.0.45.2/32 is directly connected, eth1, weight 1, 00:00:37
+O>* 10.255.0.1/32 [110/20] via 10.0.25.1, eth2, weight 1, 00:00:22
+O>* 10.255.0.2/32 [110/10] via 10.0.25.1, eth2, weight 1, 00:00:22
+O>* 10.255.0.3/32 [110/110] via 10.0.45.1, eth1, weight 1, 00:00:22
+O>* 10.255.0.4/32 [110/10] via 10.0.45.1, eth1, weight 1, 00:00:22
+L * 10.255.0.5/32 is directly connected, lo, weight 1, 00:00:37
+C>* 10.255.0.5/32 is directly connected, lo, weight 1, 00:00:37
+C>* 172.20.20.0/24 is directly connected, eth0, weight 1, 00:00:37
+L>* 172.20.20.4/32 is directly connected, eth0, weight 1, 00:00:37
+O>* 192.168.1.0/24 [110/30] via 10.0.25.1, eth2, weight 1, 00:00:22
+O>* 192.168.2.0/24 [110/20] via 10.0.25.1, eth2, weight 1, 00:00:22
+O>* 192.168.3.0/24 [110/120] via 10.0.45.1, eth1, weight 1, 00:00:22
+O>* 192.168.4.0/24 [110/20] via 10.0.45.1, eth1, weight 1, 00:00:22
+C>* 192.168.5.0/24 is directly connected, eth3, weight 1, 00:00:37
+L>* 192.168.5.1/32 is directly connected, eth3, weight 1, 00:00:37
+
+===== r5# show ip ospf neighbor
+
+Neighbor ID     Pri State           Up Time         Dead Time Address         Interface                        RXmtL RqstL DBsmL
+10.255.0.4        1 Full/-          26.747s           33.425s 10.0.45.1       eth1:10.0.45.2                       0     0     0
+10.255.0.2        1 Full/-          26.974s           33.025s 10.0.25.1       eth2:10.0.25.2                       0     0     0
+
+
+===== r5# show ip ospf database
+
+       OSPF Router with ID (10.255.0.5)
+
+                Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age  Seq#       CkSum  Link count
+10.255.0.1     10.255.0.1        28 0x80000006 0x1808 6
+10.255.0.2     10.255.0.2        28 0x80000006 0x5a5c 6
+10.255.0.3     10.255.0.3        27 0x80000006 0x270f 6
+10.255.0.4     10.255.0.4        22 0x80000006 0xbfe3 6
+10.255.0.5     10.255.0.5        26 0x80000006 0x83e3 6
+
+
+
+===== r5# show ip ospf route
+============ OSPF network routing table ============
+N    10.0.12.0/30          [20] area: 0.0.0.0
+                           via 10.0.25.1, eth2
+N    10.0.13.0/30          [120] area: 0.0.0.0
+                           via 10.0.25.1, eth2
+N    10.0.25.0/30          [10] area: 0.0.0.0
+                           directly attached to eth2
+N    10.0.34.0/30          [110] area: 0.0.0.0
+                           via 10.0.45.1, eth1
+N    10.0.45.0/30          [10] area: 0.0.0.0
+                           directly attached to eth1
+N    10.255.0.1/32         [20] area: 0.0.0.0
+                           via 10.0.25.1, eth2
+N    10.255.0.2/32         [10] area: 0.0.0.0
+                           via 10.0.25.1, eth2
+N    10.255.0.3/32         [110] area: 0.0.0.0
+                           via 10.0.45.1, eth1
+N    10.255.0.4/32         [10] area: 0.0.0.0
+                           via 10.0.45.1, eth1
+N    10.255.0.5/32         [0] area: 0.0.0.0
+                           directly attached to lo
+N    192.168.1.0/24        [30] area: 0.0.0.0
+                           via 10.0.25.1, eth2
+N    192.168.2.0/24        [20] area: 0.0.0.0
+                           via 10.0.25.1, eth2
+N    192.168.3.0/24        [120] area: 0.0.0.0
+                           via 10.0.45.1, eth1
+N    192.168.4.0/24        [20] area: 0.0.0.0
+                           via 10.0.45.1, eth1
+N    192.168.5.0/24        [10] area: 0.0.0.0
+                           directly attached to eth3
+
+============ OSPF router routing table =============
+
+============ OSPF external routing table ===========
+
+

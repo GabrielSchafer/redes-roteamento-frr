@@ -1,0 +1,17 @@
+{
+  "protocolo": "rip",
+  "t_deploy": 1790441453.379379,
+  "captura_so_saida": true,
+  "t_convergido": 1790441456.33809,
+  "t_regime_ini": 1790441476.3447306,
+  "t_regime_fim": 1790441603.2349067,
+  "t_falha": 1790441608.5914125,
+  "t_recuperado_aprox": 1790441808.53439,
+  "enlace_cortado": [
+    "r1",
+    "r3"
+  ],
+  "interface": "eth2",
+  "t_pos_falha": 1790441814.6367443,
+  "t_fim": 1790441819.3449209
+}

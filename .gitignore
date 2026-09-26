@@ -1,0 +1,4 @@
+configs/ativo/
+clab-redes/
+__pycache__/
+*.pyc
