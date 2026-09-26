@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="700" viewBox="0 0 960 700" font-family="Helvetica, Arial, sans-serif">
+  <rect width="960" height="700" fill="#FFFFFF"/>
+
+  <!-- Sistemas Autonomos -->
+  <rect x="30" y="30" width="310" height="580" rx="14" fill="#EAF2FB" stroke="#3D85C6" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="46" y="56" font-size="15" font-weight="bold" fill="#3D85C6">AS 65001</text>
+  <rect x="380" y="30" width="200" height="270" rx="14" fill="#FDF1EC" stroke="#E07A5F" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="396" y="56" font-size="15" font-weight="bold" fill="#E07A5F">AS 65002</text>
+  <rect x="620" y="30" width="310" height="580" rx="14" fill="#EEF6EA" stroke="#6AA84F" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="636" y="56" font-size="15" font-weight="bold" fill="#6AA84F">AS 65003</text>
+
+  <!-- Enlaces de acesso (host - roteador) -->
+  <g stroke="#9AA3AD" stroke-width="2">
+    <line x1="200" y1="112" x2="200" y2="180"/>
+    <line x1="480" y1="112" x2="480" y2="180"/>
+    <line x1="760" y1="112" x2="760" y2="180"/>
+    <line x1="200" y1="450" x2="200" y2="518"/>
+    <line x1="760" y1="450" x2="760" y2="518"/>
+  </g>
+
+  <!-- Enlaces entre roteadores -->
+  <g stroke="#34495E" stroke-width="3">
+    <line x1="200" y1="240" x2="200" y2="390"/>
+    <line x1="760" y1="240" x2="760" y2="390"/>
+    <line x1="230" y1="420" x2="730" y2="420"/>
+  </g>
+  <g stroke="#D9480F" stroke-width="3" stroke-dasharray="10 6">
+    <line x1="230" y1="210" x2="450" y2="210"/>
+    <line x1="510" y1="210" x2="730" y2="210"/>
+  </g>
+
+  <!-- Rotulos dos enlaces -->
+  <g font-size="12" fill="#34495E" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+    <text x="212" y="310">10.0.12.0/30</text>
+    <text x="212" y="326" fill="#3D85C6">iBGP</text>
+    <text x="772" y="310">10.0.45.0/30</text>
+    <text x="772" y="326" fill="#6AA84F">iBGP</text>
+    <text x="480" y="410" text-anchor="middle">10.0.25.0/30 · eBGP</text>
+    <text x="340" y="194" text-anchor="middle">10.0.13.0/30 · eBGP</text>
+    <text x="620" y="194" text-anchor="middle">10.0.34.0/30 · eBGP</text>
+  </g>
+  <g font-size="11" fill="#D9480F" font-weight="bold" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="round" paint-order="stroke">
+    <text x="340" y="236" text-anchor="middle">lento · +10 ms · custo 100</text>
+    <text x="620" y="236" text-anchor="middle">lento · +10 ms · custo 100</text>
+  </g>
+
+  <!-- Interfaces -->
+  <g font-size="10" fill="#6B7785">
+    <text x="236" y="203">eth2</text>
+    <text x="444" y="203" text-anchor="end">eth1</text>
+    <text x="516" y="203">eth2</text>
+    <text x="724" y="203" text-anchor="end">eth1</text>
+    <text x="190" y="256" text-anchor="end">eth1</text>
+    <text x="190" y="382" text-anchor="end">eth1</text>
+    <text x="750" y="256" text-anchor="end">eth2</text>
+    <text x="750" y="382" text-anchor="end">eth1</text>
+    <text x="236" y="438">eth2</text>
+    <text x="724" y="438" text-anchor="end">eth2</text>
+    <text x="190" y="176" text-anchor="end">eth3</text>
+    <text x="470" y="176" text-anchor="end">eth3</text>
+    <text x="750" y="176" text-anchor="end">eth3</text>
+    <text x="190" y="472" text-anchor="end">eth3</text>
+    <text x="750" y="472" text-anchor="end">eth3</text>
+  </g>
+
+  <!-- Redes de acesso -->
+  <g font-size="11" fill="#6B7785">
+    <text x="210" y="150">192.168.1.0/24</text>
+    <text x="490" y="150">192.168.3.0/24</text>
+    <text x="770" y="150">192.168.4.0/24</text>
+    <text x="210" y="490">192.168.2.0/24</text>
+    <text x="770" y="490">192.168.5.0/24</text>
+  </g>
+
+  <!-- Roteadores -->
+  <g fill="#0B6FB8" stroke="#08507F" stroke-width="2">
+    <circle cx="200" cy="210" r="30"/>
+    <circle cx="200" cy="420" r="30"/>
+    <circle cx="480" cy="210" r="30"/>
+    <circle cx="760" cy="210" r="30"/>
+    <circle cx="760" cy="420" r="30"/>
+  </g>
+  <g font-size="16" font-weight="bold" fill="#FFFFFF" text-anchor="middle">
+    <text x="200" y="216">R1</text>
+    <text x="200" y="426">R2</text>
+    <text x="480" y="216">R3</text>
+    <text x="760" y="216">R4</text>
+    <text x="760" y="426">R5</text>
+  </g>
+  <g font-size="11" fill="#34495E">
+    <text x="162" y="214" text-anchor="end">lo 10.255.0.1</text>
+    <text x="162" y="424" text-anchor="end">lo 10.255.0.2</text>
+    <text x="480" y="258" text-anchor="middle">lo 10.255.0.3</text>
+    <text x="798" y="214">lo 10.255.0.4</text>
+    <text x="798" y="424">lo 10.255.0.5</text>
+  </g>
+
+  <!-- Hosts -->
+  <g fill="#F4F6F8" stroke="#8A949E" stroke-width="1.5">
+    <rect x="140" y="68" width="120" height="44" rx="8"/>
+    <rect x="420" y="68" width="120" height="44" rx="8"/>
+    <rect x="700" y="68" width="120" height="44" rx="8"/>
+    <rect x="140" y="518" width="120" height="44" rx="8"/>
+    <rect x="700" y="518" width="120" height="44" rx="8"/>
+  </g>
+  <g text-anchor="middle" fill="#34495E">
+    <text x="200" y="87" font-size="14" font-weight="bold">h1</text>
+    <text x="200" y="103" font-size="11">192.168.1.10</text>
+    <text x="480" y="87" font-size="14" font-weight="bold">h3</text>
+    <text x="480" y="103" font-size="11">192.168.3.10</text>
+    <text x="760" y="87" font-size="14" font-weight="bold">h4</text>
+    <text x="760" y="103" font-size="11">192.168.4.10</text>
+    <text x="200" y="537" font-size="14" font-weight="bold">h2</text>
+    <text x="200" y="553" font-size="11">192.168.2.10</text>
+    <text x="760" y="537" font-size="14" font-weight="bold">h5</text>
+    <text x="760" y="553" font-size="11">192.168.5.10</text>
+  </g>
+
+  <!-- Legenda -->
+  <g font-size="12" fill="#34495E">
+    <circle cx="48" cy="648" r="9" fill="#0B6FB8"/>
+    <text x="64" y="652">Roteador FRR 10.7.1</text>
+    <rect x="200" y="638" width="28" height="20" rx="4" fill="#F4F6F8" stroke="#8A949E"/>
+    <text x="236" y="652">Host (netshoot)</text>
+    <line x1="360" y1="648" x2="400" y2="648" stroke="#34495E" stroke-width="3"/>
+    <text x="408" y="652">Enlace normal (custo OSPF 10)</text>
+    <line x1="610" y1="648" x2="650" y2="648" stroke="#D9480F" stroke-width="3" stroke-dasharray="10 6"/>
+    <text x="658" y="652">Enlace lento (netem, custo OSPF 100)</text>
+    <text x="30" y="682" font-size="11" fill="#6B7785">eth0 de cada nó é a rede de gerência do Containerlab (172.20.20.0/24) e fica fora do roteamento.</text>
+  </g>
+</svg>
