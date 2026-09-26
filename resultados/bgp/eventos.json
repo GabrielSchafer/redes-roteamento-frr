@@ -1,0 +1,17 @@
+{
+  "protocolo": "bgp",
+  "t_deploy": 1790442039.991744,
+  "captura_so_saida": true,
+  "t_convergido": 1790442042.8646393,
+  "t_regime_ini": 1790442062.868503,
+  "t_regime_fim": 1790442189.958259,
+  "t_falha": 1790442195.299413,
+  "t_recuperado_aprox": 1790442344.8918555,
+  "enlace_cortado": [
+    "r1",
+    "r2"
+  ],
+  "interface": "eth1",
+  "t_pos_falha": 1790442350.8555524,
+  "t_fim": 1790442355.436056
+}

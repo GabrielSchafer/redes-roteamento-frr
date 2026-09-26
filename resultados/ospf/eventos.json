@@ -1,0 +1,17 @@
+{
+  "protocolo": "ospf",
+  "t_deploy": 1790441822.8769681,
+  "captura_so_saida": true,
+  "t_convergido": 1790441837.957012,
+  "t_regime_ini": 1790441857.9601302,
+  "t_regime_fim": 1790441985.0398526,
+  "t_falha": 1790441990.3189683,
+  "t_recuperado_aprox": 1790442026.0061176,
+  "enlace_cortado": [
+    "r1",
+    "r2"
+  ],
+  "interface": "eth1",
+  "t_pos_falha": 1790442031.750458,
+  "t_fim": 1790442036.3101354
+}
