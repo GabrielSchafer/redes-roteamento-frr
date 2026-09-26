@@ -6,6 +6,10 @@ A definição fica em um único lugar, `topologia.py`. O `gerar_configs.py` lê 
 
 ## Diagrama
 
+![Topologia](topologia.svg)
+
+Fonte editável: [`topologia.drawio`](topologia.drawio). Versão em Mermaid e em texto:
+
 ```mermaid
 graph LR
     subgraph AS65001["AS 65001"]

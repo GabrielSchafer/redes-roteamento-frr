@@ -15,17 +15,9 @@ Por que containers funcionam como roteadores: cada container tem o próprio *net
 
 ## Topologia
 
-```
-      AS 65001               AS 65002               AS 65003
+![Topologia: 5 roteadores FRR em 3 AS](docs/topologia.svg)
 
-        h1                     h3                     h4
-         |                      |                      |
-        R1 ------ lento ------ R3 ------ lento ------ R4
-         |                                             |
-        R2 ------------------------------------------ R5
-         |                                             |
-        h2                                             h5
-```
+Fonte editável do diagrama: [`docs/topologia.drawio`](docs/topologia.drawio) (abre no [diagrams.net](https://app.diagrams.net)).
 
 Anel de 5 roteadores: sempre existem dois caminhos entre quaisquer dois pontos. Os enlaces R1-R3 e R3-R4 simulam enlaces de longa distância (atraso de 10 ms por sentido em cada ponta via `tc netem`, custo OSPF 100 contra 10 nos demais).
 

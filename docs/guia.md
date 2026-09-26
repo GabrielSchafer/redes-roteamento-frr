@@ -39,7 +39,7 @@ Sobe os 10 containers, aplica o atraso nos enlaces lentos e espera todos os host
 | O que ver | Comando |
 |---|---|
 | Lista de nós, estado e IP de gerência | `sudo containerlab inspect -t topologia.clab.yml` |
-| Desenho da topologia no navegador | `sudo containerlab graph -t topologia.clab.yml` e abrir `http://<ip-da-vm>:50080` (no OrbStack: `http://redes.orb.local:50080`) |
+| Desenho da topologia no navegador | `sudo containerlab graph -t topologia.clab.yml` e abrir `http://<ip-da-vm>:50080` (no OrbStack: `http://localhost:50080`) |
 | Containers rodando | `docker ps --format "table {{.Names}}\t{{.Status}}"` |
 | Interfaces de um nó | `docker exec clab-redes-r1 ip -br addr` |
 | Console do roteador | `docker exec -it clab-redes-r1 vtysh` |
@@ -55,6 +55,8 @@ Sobe os 10 containers, aplica o atraso nos enlaces lentos e espera todos os host
 | BGP | `show bgp summary`, `show ip bgp`, `show ip bgp neighbors` |
 
 Também dá para rodar de fora: `docker exec clab-redes-r1 vtysh -c "show ip route"`.
+
+No macOS 15 ou mais novo, o navegador precisa da permissão de Rede Local (Ajustes do Sistema → Privacidade e Segurança → Rede Local) para abrir `redes.orb.local`. Sem ela, dá `ERR_ADDRESS_UNREACHABLE`. Pelo `localhost` não precisa.
 
 ### Testes a partir dos hosts
 
