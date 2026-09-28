@@ -151,27 +151,6 @@ Também dá para rodar um cenário por vez: `sudo python3 experimento.py rodar o
 | Recursos | `docker stats` (CPU e memória por roteador) |
 | Complexidade de configuração | Linhas essenciais de config do protocolo nos 5 roteadores |
 
-## Demonstração manual (roteiro do vídeo)
-
-```bash
-sudo python3 experimento.py subir ospf
-docker exec -it clab-redes-r1 vtysh -c "show ip ospf neighbor"
-docker exec -it clab-redes-r1 vtysh -c "show ip route"
-docker exec -it clab-redes-h1 traceroute -n 192.168.4.10
-
-# terminal 2: ping contínuo
-docker exec -it clab-redes-h1 ping 192.168.4.10
-
-# terminal 1: corta o enlace do caminho ativo e observa o ping parar e voltar (~40 s no OSPF)
-sudo python3 experimento.py falha r1 r2
-docker exec -it clab-redes-h1 traceroute -n 192.168.4.10
-sudo python3 experimento.py restaurar r1 r2
-
-sudo python3 experimento.py derrubar
-```
-
-Comandos úteis por protocolo: `show ip rip`, `show ip ospf database`, `show bgp summary`, `show ip bgp`. Para abrir o console do roteador: `docker exec -it clab-redes-r1 vtysh`.
-
 ## Estrutura
 
 ```
